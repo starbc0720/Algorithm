@@ -8,27 +8,28 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
-        int M = Integer.parseInt(st.nextToken()); //M이상인 값
-        int N = Integer.parseInt(st.nextToken()); //N이하인 값
+        int M = Integer.parseInt(st.nextToken()); //M이상의 소수 구해야 함
+        int N = Integer.parseInt(st.nextToken()); //N이하의 소수 구해야 함
 
-        boolean[] isPrime = new boolean[N+1]; //소수임을 판단하기 위한 변수 선언
+        boolean[] isPrime = new boolean[N+1]; //1부터 표현해야 하므로 편의상 다음과 같이 +1 해줌
 
-        // 에라토스테네스의 체 알고리즘
-        for (int i = 2; i * i <= N; i++) {
-            if (!isPrime[i]) {
-                for (int j = i * i; j <= N; j += i) {
-                    if (j < isPrime.length) { // 배열 범위 확인
-                        isPrime[j] = true; // i의 배수는 소수가 아님
-                    }
+        //에라토스테네스의 체 알고리즘(통으로 외우면 편함)
+        for(int i=2; i*i <= N; i++){
+            if(!isPrime[i]){
+                for(int j=i*i; j<=N; j+=i){
+                    isPrime[j] = true;
                 }
             }
         }
 
         for(int i=M; i<=N; i++){
-            if(i>1 && !isPrime[i]){
-                System.out.println(i);
+            if(i>1 &&  !isPrime[i]){ //1은 소수가 아니므로 1보다 커야함
+                sb.append(i).append("\n");
             }
         }
+
+        System.out.print(sb);
     }
 }
