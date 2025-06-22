@@ -10,7 +10,7 @@ for line in data:
     if line == "0":
         break
     parts = list(map(int, line.strip().split()))
-    k, S = parts[0], parts[1:]
+    S = parts[1:]
     combos = list(combinations(S, 6))
     output = [' '.join(map(str, combo)) for combo in combos]
     result.append('\n'.join(output))
